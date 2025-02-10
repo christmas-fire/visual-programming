@@ -1,107 +1,48 @@
-@media (min-width: 600px) {
-
+@font-face {
+    font-family: 'Impact';
+    src: url("fonts/impact.ttf");
 }
 
-@media (max-width: 280px) {
-
+@font-face {
+    font-family: 'Inter';
+    src: url("fonts/Inter-V.ttf");
 }
 
-body {
+* {
     margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    height: 87.43px;
+    background-color: rgb(27, 84, 221);
+    text-align: center;
 }
 
 header h1 {
-    text-align: center;
-    background-color: rgb(27, 84, 221);
+    padding-top: 32px;
     color: white;
-    padding: 10px 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 900;
+    font-size: 31.58px;
+    line-height: 27.63px;
 }
 
-.hero-section {
-    display: flex;
-    align-items: center;
+.main-section {
     background-color: rgb(27, 84, 221);
-    padding: 20px;
+    display: grid;
 }
 
-.hero-content {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.hero-content h2 {
-    margin-top: 0;
-}
-
-.hero-content p {
-    margin-bottom: 10px;
-}
-
-.hero-section img {
-    max-width: 100%;
-    height: auto;
-}
-
-.hero-section button {
-    padding: 10px 20px;
-    background-color: rgb(255, 255, 255);
-    color: black;
-    border: none;
-    cursor: pointer;
-}
-
-.content-section {
-    background-color: rgb(255, 255, 255);
-    padding: 20px;
-}
-
-.content-block {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.content-block img {
-    max-width: 100%;
-    height: auto;
-    margin-right: 20px;
-}
-
-.text-content {
-    flex: 1;
-}
-
-.content-section button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color:rgb(27, 84, 221);
+.main-section h2 {
     color: white;
-    border: none;
-    cursor: pointer;
+
+}
+
+.article-section {
+    background-color: rgb(255, 255, 255);
 }
 
 footer {
     background-color: rgb(232, 232, 232);
-}
-
-footer .icons {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 10px;
-}
-
-.icons_item img {
-    width: 30px;
-    height: 30px;
-}
-
-footer .url,
-footer .author,
-footer .copyright,
-footer .watermark {
-    text-align: center;
-    margin: 10px 0;
 }
