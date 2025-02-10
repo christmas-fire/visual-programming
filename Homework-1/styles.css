@@ -1,0 +1,107 @@
+@media (min-width: 600px) {
+
+}
+
+@media (max-width: 280px) {
+
+}
+
+body {
+    margin: 0;
+}
+
+header h1 {
+    text-align: center;
+    background-color: rgb(27, 84, 221);
+    color: white;
+    padding: 10px 0;
+}
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    background-color: rgb(27, 84, 221);
+    padding: 20px;
+}
+
+.hero-content {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.hero-content h2 {
+    margin-top: 0;
+}
+
+.hero-content p {
+    margin-bottom: 10px;
+}
+
+.hero-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+.hero-section button {
+    padding: 10px 20px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.content-section {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+.content-block {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.content-block img {
+    max-width: 100%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.content-section button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color:rgb(27, 84, 221);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+footer {
+    background-color: rgb(232, 232, 232);
+}
+
+footer .icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.icons_item img {
+    width: 30px;
+    height: 30px;
+}
+
+footer .url,
+footer .author,
+footer .copyright,
+footer .watermark {
+    text-align: center;
+    margin: 10px 0;
+}
