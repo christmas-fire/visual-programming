@@ -3,159 +3,331 @@
     padding: 0;
 }
 
-@media screen and (min-width: 600px) {
+body {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 861px auto 181px;
+    grid-template-areas:
+    "header" 
+    "main"
+    "footer";
+}
+
+header {
+    width: 100%;
+    height: 861px;
+    background-color: rgb(27, 84, 221);
+    font-family: Inter;
+
+    grid-area: header;
+}
+
+main {
+    background-color: rgb(255, 255, 255);
+    font-family: Inter;
+
+    grid-area: main;
+}
+
+footer {
+    width: 100%;
+    height: 181px;
+    background-color: rgb(232, 232, 232);
+    font-family: Inter;
+
+    grid-area: footer;
+}
+
+.header-flexbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-flexbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-flexbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header .title {
+    margin-top: 32px;
+    width: 100px;
+    height: 55.43px;
+}
+
+header .title h1 {
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 900;
+    font-size: 31.58px;
+    line-height: 27.63px;
+    text-align: center;
+}
+
+header .slogan {
+    margin-top: 32px;
+    width: 480px;
+    height: 88px;
+}
+
+header .slogan h2 {
+    color: white;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    text-align: center;
+}
+
+header .wisp-cat img {
+    margin-top: 32px;
+    width: 480px;
+    height: 270px;
+}
+
+header .fact {
+    margin-top: 32px;
+    width: 480px;
+    height: 87px;
+}
+
+header .fact h2 {
+    color: white;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+}
+
+header .story {
+    margin-top: 32px;
+    width: 480px;
+    height: 85px;
+}
+
+header .story p {
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+}
+
+header .header-CTA {
+    margin-top: 32px;
+}
+
+header .header-CTA button {
+    width: 110px;
+    height: 41px;
+    background-color: white;
+    color: black;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+main .article-block {
+    width: 480px;
+    height: 240px;
+    margin-top: 32px;
+
+    display: flex;
+    align-items: center;
+}
+
+main .article-block img {
+    width: 240px;
+    height: 240px;
+}
+
+main .article-block .text-content h2 {
+    margin-left: 32px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+main .article-block .text-content p {
+    margin-left: 32px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+main .article-block .text-content a {
+    margin-left: 32px;
+    color: rgb(27, 84, 221);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+}
+
+main .main-CTA button {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    width: 110px;
+    height: 41px;
+    background-color: rgb(27, 84, 221);
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+footer .icons {
+    margin-top: 26px;
+    width: 118px;
+    height: 18px;
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+footer .icons img{
+    width: 18px;
+    height: 18px;
+}
+
+footer .url {
+    margin-top: 16px;
+    color: rgb(38, 38, 38);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+}
+
+footer .copyright {
+    margin-top: 8px;
+    color: rgb(38, 38, 38);
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+    text-align: center;
+}
+
+footer .watermark {
+    margin-top: 16px;
+    margin-bottom: 26px;
+    width: 40px;
+    height: 22px;
+}
+
+@media screen and (max-width: 280px){
     body {
         display: grid;
         grid-template-columns: auto;
-        grid-template-rows: 861px auto 181px;
+        grid-template-rows: 957px auto 181px;
         grid-template-areas:
         "header" 
         "main"
         "footer";
     }
-    
+
+    img {
+        object-fit: contain;
+    }
+
     header {
         width: 100%;
-        height: 861px;
+        height: 957px;
         background-color: rgb(27, 84, 221);
+        font-family: Inter;
     
         grid-area: header;
+        grid-row: 1 / 2;
     }
-    
-    main {
-        background-color: rgb(255, 255, 255);
 
-        grid-area: main;
-    }
-    
-    footer {
-        width: 100%;
-        height: 181px;
-        background-color: rgb(232, 232, 232);
-
-        grid-area: footer;
-    }
-    
-    .header-flexbox {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .main-flexbox {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .footer-flexbox {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    header h1 {
+    header .title {
         margin-top: 32px;
-        color: white;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-weight: 900;
-        font-size: 31.58px;
-        line-height: 27.63px;
+        width: 100px;
+        height: 55.43px;
     }
-    
+
     header .slogan {
         margin-top: 32px;
-        color: white;
-        font-family: Inter;
-        font-weight: 700;
-        font-size: 36px;
-        line-height: 44px;
-        text-align: center;
+        width: 240px;
+        height: 176px;
     }
-    
+
     header .wisp-cat img {
-        margin-top: 32px;
-        width: 480px;
-        height: 270px;
+        width: 240px;
+        height: 135px;
     }
-    
+
     header .fact {
         margin-top: 32px;
-        color: white;
-        font-family: Inter;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
-        text-align: center;
-    }
-    
-    header .story {
-        margin-top: 32px;
-        color: white;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        text-align: center;
-    }
-    
-    header button {
-        margin-top: 32px;
-        margin-bottom: 32px;
-        width: 110px;
-        height: 41px;
-        background-color: white;
-        color: black;
-        border: none;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-    }
-    
-    main .article-block {
-        width: 480px;
-        height: 240px;
-        margin-top: 32px;
-
-        display: flex;
-        align-items: center;
-    }
-    
-    main .article-block img {
         width: 240px;
-        height: 240px;
+        height: 145px;
     }
+
+    header .story {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 32px;
+        width: 270px;
+        height: 170px;
+    }
+
+    main .article-block {
+        width: 240px;
+        height: 419px;
+        margin-top: 32px;
     
+        display: flex;
+        flex-direction: column;
+    }
+
+    main .text-content {
+        margin-left: -30px;
+    }
+
     main .article-block .text-content h2 {
-        margin-left: 32px;
+        margin-top: 16px;
         font-weight: 700;
         font-size: 24px;
         line-height: 29px;
     }
     
     main .article-block .text-content p {
-        margin-left: 32px;
         margin-top: 16px;
-        margin-bottom: 16px;
         font-weight: 400;
         font-size: 14px;
         line-height: 17px;
     }
     
     main .article-block .text-content a {
-        margin-left: 32px;
+        margin-bottom: 16px;
         color: rgb(27, 84, 221);
         font-weight: 600;
         font-size: 14px;
         line-height: 17px;
         text-decoration: none;
     }
-    
-    main button {
+
+    main .main-CTA {
         margin-top: 32px;
-        margin-bottom: 32px;
+    }
+    
+    main .main-CTA button {
         width: 110px;
         height: 41px;
         background-color: rgb(27, 84, 221);
@@ -165,48 +337,4 @@
         font-size: 14px;
         line-height: 17px;
     }
-    
-    footer .icons {
-        margin-top: 26px;
-        width: 118px;
-        height: 18px;
-        list-style-type: none;
-
-        display: flex;
-        flex-direction: row;
-        gap: 32px;
-    }
-    
-    footer .icons img{
-        width: 18px;
-        height: 18px;
-    }
-    
-    footer .url {
-        margin-top: 16px;
-        color: rgb(38, 38, 38);
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 1px;
-    }
-    
-    footer .copyright {
-        margin-top: 8px;
-        color: rgb(38, 38, 38);
-        font-weight: 400;
-        font-size: 10px;
-        line-height: 16px;
-        text-align: center;
-    }
-    
-    footer .watermark {
-        margin-top: 16px;
-        margin-bottom: 26px;
-        width: 40px;
-        height: 22px;
-    }
-}
-
-@media screen and (max-width: 280px) {
-
 }
