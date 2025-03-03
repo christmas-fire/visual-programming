@@ -1,4 +1,3 @@
-// calcStatsFromAPITest.js
 const calcStatsFromAPI = require('./calcStatsFromAPI');
 const loadData = require('./loadData');
 
