@@ -1,0 +1,27 @@
+/* src/components/BookCard.css */
+.book-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.book-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.book-title {
+    font-size: 1.5em;
+    margin: 10px 0 5px;
+}
+
+.book-authors {
+    font-size: 1em;
+    color: #555;
+}
