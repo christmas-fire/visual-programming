@@ -1,66 +1,44 @@
-// src/App.js
-import React, { useEffect, useState } from 'react';
-import BookCard from './components/BookCard';
+import React, { useEffect, useState } from "react";
+import BookCard from "./components/BookCard";
 
-function App() {
-    const [books, setBooks] = useState([]);
+const API_BOOKS = "https://fakeapi.extendsclass.com/books";
+const API_COVER = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                // Fetch books data
-                const booksResponse = await fetch('https://fakeapi.extendsclass.com/books');
-                if (!booksResponse.ok) {
-                    throw new Error(`HTTP error! status: ${booksResponse.status}`);
-                }
-                const booksData = await booksResponse.json();
+const App = () => {
+  const [books, setBooks] = useState([]);
 
-                // Fetch images for each book
-                const fetchImages = async (book) => {
-                    try {
-                        const imageResponse = await fetch(
-                            `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.isbn}`
-                        );
-                        if (!imageResponse.ok) {
-                            throw new Error(`HTTP error! status: ${imageResponse.status}`);
-                        }
-                        const imageData = await imageResponse.json();
-                        if (imageData.items && imageData.items.length > 0) {
-                            const imageUrl = imageData.items[0].volumeInfo.imageLinks?.thumbnail;
-                            if (imageUrl) {
-                                const imageBlob = await fetch(imageUrl).then(res => res.blob());
-                                return { ...book, imageBlob };
-                            }
-                        }
-                        return { ...book, imageBlob: null };
-                    } catch (error) {
-                        console.error(`Failed to fetch image for book ${book.title}:`, error);
-                        return { ...book, imageBlob: null };
-                    }
-                };
+  useEffect(() => {
+    fetch(API_BOOKS)
+      .then((res) => res.json())
+      .then(async (data) => {
+        const booksWithCovers = await Promise.all(
+          data.map(async (book) => {
+            const cover = await fetchCover(book.isbn);
+            return { ...book, cover };
+          })
+        );
+        setBooks(booksWithCovers);
+      })
+      .catch((error) => console.error("Error fetching books:", error));
+  }, []);
 
-                const booksWithImages = await Promise.all(booksData.map(fetchImages));
-                setBooks(booksWithImages);
-            } catch (error) {
-                console.error('Failed to fetch books:', error);
-            }
-        };
+  const fetchCover = async (isbn) => {
+    try {
+      const res = await fetch(`${API_COVER}${isbn}`);
+      const data = await res.json();
+      return data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail || "no-cover.png";
+    } catch {
+      return "no-cover.png";
+    }
+  };
 
-        fetchBooks();
-    }, []);
-
-    return (
-        <div style={{ padding: '20px', display: 'flex', flexWrap: 'wrap' }}>
-            {books.map((book) => (
-                <BookCard
-                    key={book.id}
-                    imageBlob={book.imageBlob}
-                    title={book.title}
-                    authors={book.authors}
-                />
-            ))}
-        </div>
-    );
-}
+  return (
+    <div className="book-list">
+      {books.map((book) => (
+        <BookCard key={book.id} title={book.title} authors={book.authors} cover={book.cover} />
+      ))}
+    </div>
+  );
+};
 
 export default App;
