@@ -1,0 +1,34 @@
+/* src/components/BookCard.css */
+.book-card {
+    border: 1px solid #e07a5f; /* теплый оттенок коричневого */
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #fffaf0; /* теплый оттенок белого */
+    transition: transform .2s; /* Анимация увеличения при наведении */
+}
+
+.book-card:hover {
+    transform: scale(1.1); /* Увеличение на 10% при наведении */
+}
+
+.book-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.book-title {
+    font-size: 1.5em;
+    margin: 10px 0 5px;
+    color: #d4af37; /* теплый оттенок желтого */
+}
+
+.book-authors {
+    font-size: 1em;
+    color: #b8860b; /* теплый оттенок коричневого */
+}
