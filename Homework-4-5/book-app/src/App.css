@@ -1,0 +1,10 @@
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+h1 {
+    text-align: center;
+}

@@ -1,0 +1,61 @@
+.book-card {
+    border: 1px solid #d3d3d3; 
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    width: 200px;
+    height: 350px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-image-container {
+    width: 150px; /* Фиксированный размер контейнера изображения */
+    height: 200px; /* Фиксированный размер контейнера изображения */
+    margin-bottom: 10px; /* Отступ под изображением */
+    border: 1px solid #ccc; /* рамка вокруг изображения */
+    border-radius: 4px;
+    overflow: hidden; /* обрезаем изображение, если оно не влезает */
+    background-color: #e0e0e0; /* серый фон, если изображение не прогрузилось */
+    display: flex; /* Для центрирования placeholder'а */
+    justify-content: center; /* Центрируем placeholder по горизонтали */
+    align-items: center; /* Центрируем placeholder по вертикали */
+}
+
+.book-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* сохраняем пропорции изображения */
+}
+
+.book-title {
+    font-size: 1.2em;
+    margin: 10px 0 5px;
+    color: #222; /* темно-серый цвет текста */
+    font-weight: bold;
+    flex: 1; /* Занимает доступное пространство */
+}
+
+.book-authors {
+    font-size: 0.9em;
+    color: #555; /* серый цвет текста */
+    margin-bottom: 10px;
+    flex: 1; /* Занимает доступное пространство */
+}
+
+/* src/components/BookCard.css */
+.placeholder {
+    font-size: 0.9em; /* Размер шрифта */
+    color: #aaa; /* Светло-серый цвет текста */
+    text-transform: uppercase; /* Верхний регистр */
+    letter-spacing: 1px; /* Расстояние между буквами */
+}
