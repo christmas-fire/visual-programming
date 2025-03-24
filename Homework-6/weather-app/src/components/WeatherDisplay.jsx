@@ -1,22 +1,20 @@
 import React from 'react';
 
 function WeatherDisplay({ data }) {
-  if (!data) return null;
-
-  const forecastList = data.list.slice(0, 5); // Показываем прогноз на 5 ближайших временных точек
+  if (!data || data.length === 0) return null;
 
   return (
     <div className="weather-display">
-      <h2>{data.city.name}</h2>
+      <h2>5 days forecast</h2>
       <div className="forecast">
-        {forecastList.map((item, index) => (
+        {data.map((day, index) => (
           <div key={index} className="forecast-item">
-            <p>{new Date(item.dt * 1000).toLocaleTimeString()}</p>
+            <p>{new Date(day.date).toLocaleDateString()}</p>
             <img
-              src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-              alt={item.weather[0].description}
+              src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`}
+              alt={day.description}
             />
-            <p>{Math.round(item.main.temp)}°C</p>
+            <p>{Math.round(day.temp)}°C</p>
           </div>
         ))}
       </div>

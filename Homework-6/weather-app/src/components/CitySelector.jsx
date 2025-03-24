@@ -12,11 +12,11 @@ function CitySelector({ onCityChange }) {
     <form onSubmit={handleSubmit} className="city-selector">
       <input
         type="text"
-        placeholder="Введите город"
+        placeholder="Input your city"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button type="submit">Выбрать</button>
+      <button type="submit">Submit</button>
     </form>
   );
 }
