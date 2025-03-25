@@ -3,7 +3,7 @@
     justify-content: center; /* Горизонтальное центрирование */
     align-items: center; /* Вертикальное центрирование */
     height: 100vh; /* Высота родительского контейнера равна высоте экрана */
-    background-color: #f0f8ff; /* Фон за пределами .app */
+    background-color: lightgoldenrodyellow; /* Фон за пределами .app */
   }
   
   .app {
@@ -14,7 +14,7 @@
     height: 600px;
     width: 400px;
     border-radius: 10px; /* Добавляем скругленные углы для красоты */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для выделения */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Тень для выделения */
   }
   
   h1 {
@@ -36,14 +36,14 @@
     padding: 10px 20px;
     margin-left: 10px;
     border: none;
-    background-color: #007bff;
+    background-color: rgb(215, 184, 105);
     color: white;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .city-selector button:hover {
-    background-color: #0056b3;
+    background-color: rgb(190, 141, 78);
   }
   
   .weather-display {
@@ -77,4 +77,8 @@
   .forecast-item p {
     font-size: 14px;
     margin: 5px 0;
+  }
+
+  .forecast-item:hover {
+    transform: scale(1.05);
   }

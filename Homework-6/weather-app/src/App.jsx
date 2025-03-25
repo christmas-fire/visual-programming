@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import WeatherDisplay from './components/WeatherDisplay';
 import CitySelector from './components/CitySelector';
-import './App.css'
+import './App.css';
 
 const API_KEY = '6094043f9c303b397d7b841afa366a9a'; // Замените на ваш API-ключ
 const GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0/direct';
@@ -13,21 +13,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // Получение координат города
-  // Получение прогноза погоды
-  const fetchWeather = useCallback(async (lat, lon) => {
-    try {
-      const response = await fetch(
-        `${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-      );
-      if (!response.ok) throw new Error('Ошибка при получении погоды');
-      const data = await response.json();
-      setWeatherData(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Ошибка:', error);
-    }
-  }, []); // Нет зависимостей, так как функция не использует внешних переменных
-
   const fetchCoordinates = useCallback(async (cityName) => {
     try {
       const response = await fetch(
@@ -42,8 +27,42 @@ function App() {
     } catch (error) {
       console.error('Ошибка:', error);
     }
-  }, [fetchWeather]); // Добавляем fetchWeather в массив зависимостей
+  }, []);
 
+  // Получение прогноза погоды
+  const fetchWeather = useCallback(async (lat, lon) => {
+    try {
+      const response = await fetch(
+        `${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      );
+      if (!response.ok) throw new Error('Ошибка при получении погоды');
+      const data = await response.json();
+
+      // Агрегация данных по дням
+      const dailyForecast = aggregateForecast(data.list);
+      setWeatherData(dailyForecast);
+      setLoading(false);
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  }, []);
+
+  // Агрегация данных по дням
+  const aggregateForecast = (forecastList) => {
+    const dailyData = {};
+    forecastList.forEach((item) => {
+      const date = item.dt_txt.split(' ')[0]; // Извлекаем дату из timestamp
+      if (!dailyData[date]) {
+        dailyData[date] = {
+          date,
+          temp: item.main.temp,
+          icon: item.weather[0].icon,
+          description: item.weather[0].description,
+        };
+      }
+    });
+    return Object.values(dailyData); // Преобразуем объект в массив
+  };
 
   // Обновление данных каждые три часа
   useEffect(() => {
@@ -51,24 +70,24 @@ function App() {
       fetchCoordinates(city);
     }, 3 * 60 * 60 * 1000); // 3 часа
     return () => clearInterval(interval);
-  }, [city, fetchCoordinates]); // Добавляем city и fetchCoordinates в массив зависимостей
+  }, [city, fetchCoordinates]);
 
   // Первоначальная загрузка
   useEffect(() => {
     fetchCoordinates(city);
-  }, [city, fetchCoordinates]); // Добавляем city и fetchCoordinates в массив зависимостей
+  }, [city, fetchCoordinates]);
 
   return (
-    <div className='container'>
-        <div className="app">
-            <h1>weather-app</h1>
-            <CitySelector onCityChange={(newCity) => setCity(newCity)} />
-            {loading ? (
-                <p>Загрузка...</p>
-            ) : (
-                <WeatherDisplay data={weatherData} />
-            )}
-        </div>
+    <div className="container">
+      <div className="app">
+        <h1>Weather App</h1>
+        <CitySelector onCityChange={(newCity) => setCity(newCity)} />
+        {loading ? (
+          <p>Загрузка...</p>
+        ) : (
+          <WeatherDisplay data={weatherData} />
+        )}
+      </div>
     </div>
   );
 }
