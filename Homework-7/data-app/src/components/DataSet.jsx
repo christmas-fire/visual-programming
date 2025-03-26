@@ -11,14 +11,39 @@ const DataSet = ({ headers, data, renderHeader, renderRow }) => {
       // Если нажата клавиша Ctrl, добавляем или убираем строку из выделенных
       setSelectedRows((prev) =>
         prev.includes(index)
-          ? prev.filter((rowIndex) => rowIndex !== index) // Убираем выделение
-          : [...prev, index] // Добавляем выделение
+          ? prev.filter((rowIndex) => rowIndex !== index) // Убираем выделение строки
+          : [...prev, index] // Добавляем выделение строки
       );
+
+      // Если строка снимается с выделения, удаляем выделение всех её ячеек
+      if (selectedRows.includes(index)) {
+        setSelectedCells((prev) => {
+          const updatedCells = { ...prev };
+          headers.forEach((header) => {
+            const key = `${index}-${header.key}`;
+            delete updatedCells[key];
+          });
+          return updatedCells;
+        });
+      }
     } else {
-      // Иначе выделяем только текущую строку, если она еще не выделена
-      setSelectedRows((prev) =>
-        prev.includes(index) ? [] : [index]
-      );
+      // Иначе выделяем только текущую строку, если она еще не выделена,
+      // или снимаем выделение, если она уже выделена
+      setSelectedRows((prev) => {
+        if (prev.includes(index)) {
+          // Если строка уже выделена, снимаем выделение и очищаем выделение ячеек
+          setSelectedCells((cells) => {
+            const updatedCells = { ...cells };
+            headers.forEach((header) => {
+              const key = `${index}-${header.key}`;
+              delete updatedCells[key];
+            });
+            return updatedCells;
+          });
+          return [];
+        }
+        return [index];
+      });
     }
   };
 
