@@ -1,0 +1,60 @@
+body {
+    background-color: #fafafa;
+}
+
+.accordion {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center; 
+  }
+  
+  .accordion .header {
+    background-color: #f5f5f5;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+
+  .accordion .header:hover {
+    background-color: #eaeaea;
+  }
+  
+
+  .accordion .header::after {
+    font-size: 18px;
+    color: #333;
+    transition: transform 0.3s ease;
+  }
+  
+
+  .accordion .body + .header::after {
+    content: '-';
+  }
+  
+  .accordion .body {
+    padding: 16px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  
+  .accordion .body.open {
+    max-height: 500px;
+    padding: 16px;
+  }
