@@ -1,7 +1,7 @@
 /* Фон всего приложения */
 .App {
     text-align: center;
-    background-color: #f0f8ff; /* Перламутровый белый цвет */
+    background-color: gray; /* Перламутровый белый цвет */
     min-height: 100vh; /* Занимает всю высоту экрана */
     padding: 20px; /* Добавляем отступы */
   }
