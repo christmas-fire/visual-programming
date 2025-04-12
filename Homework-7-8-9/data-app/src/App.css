@@ -125,9 +125,6 @@ body {
   background-color: #f4f7f6;
 }
 
-.App {
-  /* text-align: center; Remove default centering */
-}
 
 .app-container {
   display: flex;
