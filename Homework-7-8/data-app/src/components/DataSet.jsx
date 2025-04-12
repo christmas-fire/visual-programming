@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
 import "./DataSet.css";
 
+// Helper function to update nested properties
+const setNestedValue = (obj, path, value) => {
+  const keys = path.split('.');
+  let current = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i];
+    if (current[key] === undefined || current[key] === null) {
+      // If a nested object doesn't exist, create it.
+      // Be cautious with this; ensure it matches expected structure.
+      current[key] = {}; 
+    }
+    current = current[key];
+  }
+  // Set the value on the final key
+  current[keys[keys.length - 1]] = value;
+};
+
 const DataSet = ({
   headers,
   data,
@@ -8,11 +25,11 @@ const DataSet = ({
   onDelete,
   onUpdate,
   renderHeader = (header) => header.label || header.property,
+  renderCell,
 }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [editingRow, setEditingRow] = useState(null); // Индекс строки для редактирования
   const [editedData, setEditedData] = useState({}); // Хранение изменяемых данных
-  const [newComment, setNewComment] = useState({ name: '', email: '', body: '' });
 
   // Обработчик клика по строке
   const handleRowClick = (index, event) => {
@@ -48,7 +65,9 @@ const DataSet = ({
   // Начало редактирования строки
   const startEditing = (rowIndex) => {
     setEditingRow(rowIndex);
-    setEditedData({ ...data[rowIndex] });
+    // Deep clone the object to avoid modifying the original data directly
+    // Especially important for nested objects
+    setEditedData(JSON.parse(JSON.stringify(data[rowIndex])));
   };
 
   // Отмена редактирования
@@ -66,26 +85,6 @@ const DataSet = ({
     }
   };
 
-  // Обработчик отправки нового комментария
-  const handleAddComment = () => {
-    if (onAdd) {
-      // Находим максимальный ID в текущих данных
-      const maxId = data.length > 0 ? Math.max(...data.map((item) => item.id)) : 0;
-
-      // Создаем новый комментарий с уникальным ID
-      const newCommentWithId = {
-        id: maxId + 1, // Новый ID на 1 больше максимального
-        ...newComment,
-      };
-
-      // Вызываем функцию onAdd с новым комментарием
-      onAdd(newCommentWithId);
-
-      // Очищаем форму
-      setNewComment({ name: '', email: '', body: '' });
-    }
-  };
-
   // Обработчик удаления выделенных строк
   const handleDeleteSelected = () => {
     if (onDelete) {
@@ -95,88 +94,80 @@ const DataSet = ({
     }
   };
 
+  // Helper function to get nested value for display in input
+  const getNestedValue = (obj, path) => {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  };
+
+  // Default cell renderer if no custom one is provided
+  const defaultRenderCell = (item, header) => {
+    const value = getNestedValue(item, header.property); // Use helper here too
+    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    return value !== undefined && value !== null ? String(value) : '';
+  };
+
+  const currentRenderCell = renderCell || defaultRenderCell;
+
   return (
     <div>
-      <table className="dataSetTable">
-        <thead>
-          <tr>
-            <th className="selectableArea"></th>
-            {getHeaders().map((header, index) => (
-              <th key={index}>{renderHeader(header)}</th>
-            ))}
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, rowIndex) => (
-            <tr
-              key={rowIndex}
-              onClick={(event) => handleRowClick(rowIndex, event)}
-              className={isSelected(rowIndex) ? 'selected' : ''}
-            >
-              <td className="selectableArea">{isSelected(rowIndex) ? '✓' : ''}</td>
-              {getHeaders().map((header, colIndex) => (
-                <td key={colIndex}>
+      <div className="dataset-container">
+        <table className="dataSetTable">
+          <thead>
+            <tr>
+              <th className="selectableArea"></th>
+              {getHeaders().map((header, index) => (
+                <th key={index}>{renderHeader(header)}</th>
+              ))}
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, rowIndex) => (
+              <tr
+                key={item.id || rowIndex}
+                onClick={(event) => handleRowClick(rowIndex, event)}
+                className={isSelected(rowIndex) ? 'selected' : ''}
+              >
+                <td className="selectableArea" onClick={(e) => { e.stopPropagation(); handleRowClick(rowIndex, e); }}>
+                  {isSelected(rowIndex) ? '✓' : ''}
+                </td>
+                {getHeaders().map((header, colIndex) => (
+                  <td key={colIndex}>
+                    {editingRow === rowIndex ? (
+                      <input
+                        type="text"
+                        // Use getNestedValue to display the correct initial value for nested fields
+                        value={getNestedValue(editedData, header.property) || ''}
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          // Create a deep copy to modify before setting state
+                          const updatedEditedData = JSON.parse(JSON.stringify(editedData));
+                          // Use the helper function to set the nested value
+                          setNestedValue(updatedEditedData, header.property, newValue);
+                          setEditedData(updatedEditedData);
+                        }}
+                      />
+                    ) : (
+                      currentRenderCell(item, header)
+                    )}
+                  </td>
+                ))}
+                <td>
                   {editingRow === rowIndex ? (
-                    <input
-                      type="text"
-                      value={editedData[header.property] || ''}
-                      onChange={(e) =>
-                        setEditedData({
-                          ...editedData,
-                          [header.property]: e.target.value,
-                        })
-                      }
-                    />
+                    <>
+                      <button onClick={(e) => { e.stopPropagation(); saveChanges(); }} className='saveChanges'>Сохранить</button>
+                      <button onClick={(e) => { e.stopPropagation(); cancelEditing(); }} className='cancelEditing'>Отмена</button>
+                    </>
                   ) : (
-                    item[header.property]
+                    <button onClick={(e) => { e.stopPropagation(); startEditing(rowIndex); }} className='startEditing'>Редактировать</button>
                   )}
                 </td>
-              ))}
-              <td>
-                {editingRow === rowIndex ? (
-                  <>
-                    <button onClick={saveChanges} className='saveChanges'>Сохранить</button>
-                    <button onClick={cancelEditing} className='cancelEditing'>Отмена</button>
-                  </>
-                ) : (
-                  <button onClick={() => startEditing(rowIndex)} className='startEditing'>Редактировать</button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Форма добавления нового комментария */}
-      <div className="form">
-        <input
-          type="text"
-          placeholder="Имя"
-          value={newComment.name}
-          onChange={(e) =>
-            setNewComment({ ...newComment, name: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          value={newComment.email}
-          onChange={(e) =>
-            setNewComment({ ...newComment, email: e.target.value })
-          }
-        />
-        <textarea
-          placeholder="Комментарий"
-          value={newComment.body}
-          onChange={(e) =>
-            setNewComment({ ...newComment, body: e.target.value })
-          }
-        />
-        <button onClick={handleAddComment}>Добавить</button>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {/* Кнопка удаления выделенных строк */}
       <button onClick={handleDeleteSelected} disabled={selectedRows.length === 0} className='handleDeleteSelected'>
         Удалить выделенные
       </button>

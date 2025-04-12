@@ -113,3 +113,78 @@
     background-color: #f2f2f2;
     border: 1px solid #ddd;
   }
+
+/* General App Styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f7f6;
+}
+
+.App {
+  /* text-align: center; Remove default centering */
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Navigation Styles */
+.navigation {
+  width: 200px; /* Fixed width for nav */
+  padding: 20px;
+  background-color: #e9ecef;
+  border-right: 1px solid #dee2e6;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.navigation h3 {
+  margin-top: 0;
+  color: #495057;
+  border-bottom: 1px solid #ced4da;
+  padding-bottom: 10px;
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation li {
+  margin-bottom: 10px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #007bff;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.navigation a:hover,
+.navigation a.active { /* Style for active link if using NavLink */
+  background-color: #007bff;
+  color: white;
+}
+
+/* Content Area Styles */
+.content {
+  flex-grow: 1; /* Takes remaining space */
+  padding: 20px;
+  overflow-x: auto; /* Add horizontal scroll if content overflows */
+}
+
+.content h2 {
+  color: #343a40;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+  margin-top: 0; /* Remove default top margin for h2 */
+}
