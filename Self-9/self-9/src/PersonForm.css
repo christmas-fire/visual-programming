@@ -1,0 +1,125 @@
+/* src/PersonForm.css */
+.person-form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  max-width: 600px; /* Limit form width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.person-form h2 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875em;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Pets Array Section */
+.pets-array-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.pets-array-section h3 {
+    margin-bottom: 15px;
+}
+
+.pet-entry {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  gap: 15px; /* Space between fields and button */
+  padding: 15px;
+  border: 1px dashed #ddd;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  position: relative; /* For potential absolute positioning if needed */
+}
+
+.pet-entry .form-group {
+  flex-grow: 1; /* Allow fields to take up space */
+  margin-bottom: 0; /* Remove bottom margin inside flex */
+}
+
+.pet-entry label {
+    font-size: 0.9em; /* Smaller labels for pets */
+}
+
+
+/* Buttons */
+.submit-button,
+.secondary {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease-in-out;
+  color: white;
+}
+
+.submit-button {
+  background-color: #6f42c1; /* Change to Purple */
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+.submit-button:hover {
+  background-color: #5a32a3; /* Darker Purple */
+}
+.submit-button:disabled {
+  background-color: #cccccc;
+}
+
+.secondary {
+  background-color: #6c757d; /* Grey */
+  font-size: 0.9em; /* Smaller buttons for pets */
+  padding: 8px 12px;
+}
+.secondary:hover {
+  background-color: #5a6268;
+}
+
+.remove-pet-button {
+  background-color: #dc3545; /* Red for remove */
+   align-self: center; /* Center button vertically */
+   margin-top: 15px; /* Add some space above */
+}
+.remove-pet-button:hover {
+    background-color: #c82333;
+}
+
+.add-pet-button {
+    margin-top: 5px; /* Space above add button */
+} 

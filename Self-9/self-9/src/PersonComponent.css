@@ -1,0 +1,54 @@
+/* src/PersonComponent.css */
+.person-card {
+  border: 1px solid #d5d9dc; /* Simple border */
+  padding: 10px 15px; /* Adjust padding */
+  margin-bottom: 10px; /* Adjust margin */
+  border-radius: 4px; /* Smaller radius */
+  background-color: #ffffff; /* White background */
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); Remove shadow */
+  max-width: 500px;
+}
+
+.person-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px; /* Adjust spacing */
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+  font-size: 1.1em; /* Slightly smaller heading */
+}
+
+.person-card p {
+  margin: 4px 0; /* Adjust spacing */
+  line-height: 1.4;
+  font-size: 0.95em; /* Slightly smaller text */
+  color: #555;
+}
+
+.person-card strong {
+    color: #333; /* Ensure strong text is dark */
+}
+
+.pets-section {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee; /* Lighter border */
+}
+
+.pets-section h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #444;
+  font-size: 1em;
+}
+
+.pets-section ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.pet-item {
+  margin-bottom: 4px;
+  font-size: 0.9em;
+} 
