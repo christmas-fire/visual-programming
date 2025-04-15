@@ -1,0 +1,70 @@
+/* Base App Styles */
+.App {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f0f0f0; /* Simple light grey background */
+}
+
+/* Navigation Styles */
+.navigation {
+  width: 200px; /* Adjust width if needed */
+  flex-shrink: 0;
+  background-color: #e9ecef; /* Slightly darker grey for contrast */
+  padding: 15px;
+  border-right: 1px solid #d5d9dc; /* Simple border */
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation li {
+  margin-bottom: 8px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #6f42c1; /* Change to Purple */
+  display: block;
+  padding: 8px 10px;
+  border-radius: 3px;
+  /* Remove transition */
+}
+
+.navigation a:hover,
+.navigation a.active { 
+  background-color: #6f42c1; /* Change to Purple */
+  color: #fff; /* White text on hover/active */
+}
+
+/* Content Area Styles */
+.content {
+  flex-grow: 1; 
+  padding: 20px;
+  background-color: #ffffff; /* White content background */
+  /* Remove overflow-y, let browser handle scroll */
+}
+
+.content h1, .content h2 {
+  border-bottom: 1px solid #eee; /* Simpler border */
+  padding-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 20px; /* Add space below headings */
+  color: #333;
+}
+
+/* Hide default CRA styles */
+.App-header, .App-logo, .App-link {
+ display: none;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
